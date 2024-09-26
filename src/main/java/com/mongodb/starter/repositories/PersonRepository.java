@@ -1,6 +1,7 @@
 package com.mongodb.starter.repositories;
 
 import com.mongodb.starter.models.PersonEntity;
+import org.bson.Document;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface PersonRepository {
     List<PersonEntity> saveAll(List<PersonEntity> personEntities);
 
     List<PersonEntity> findAll();
+
+    List<Document> findAllDocuments();
 
     List<PersonEntity> findAll(List<String> ids);
 

@@ -2,6 +2,7 @@ package com.mongodb.starter.services;
 
 import com.mongodb.starter.dtos.PersonDTO;
 import com.mongodb.starter.repositories.PersonRepository;
+import org.bson.Document;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,11 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<PersonDTO> findAll() {
         return personRepository.findAll().stream().map(PersonDTO::new).toList();
+    }
+
+    @Override
+    public List<Document> findAllDocuments() {
+        return personRepository.findAllDocuments();
     }
 
     @Override

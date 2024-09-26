@@ -14,6 +14,7 @@ import com.mongodb.starter.models.PersonEntity;
 import jakarta.annotation.PostConstruct;
 import org.bson.BsonDocument;
 import org.bson.BsonNull;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
@@ -39,6 +40,7 @@ public class MongoDBPersonRepository implements PersonRepository {
                                                                            .build();
     private final MongoClient client;
     private MongoCollection<PersonEntity> personCollection;
+    private MongoCollection<org.bson.Document> personCollectionWithDocumentMapping;
 
     public MongoDBPersonRepository(MongoClient mongoClient) {
         this.client = mongoClient;
@@ -47,6 +49,7 @@ public class MongoDBPersonRepository implements PersonRepository {
     @PostConstruct
     void init() {
         personCollection = client.getDatabase("test").getCollection("persons", PersonEntity.class);
+        personCollectionWithDocumentMapping = client.getDatabase("test").getCollection("persons");
     }
 
     @Override
@@ -70,6 +73,11 @@ public class MongoDBPersonRepository implements PersonRepository {
     @Override
     public List<PersonEntity> findAll() {
         return personCollection.find().into(new ArrayList<>());
+    }
+
+    @Override
+    public List<Document> findAllDocuments() {
+        return personCollectionWithDocumentMapping.find().into(new ArrayList<>());
     }
 
     @Override

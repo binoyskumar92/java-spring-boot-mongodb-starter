@@ -2,6 +2,7 @@ package com.mongodb.starter.services;
 
 
 import com.mongodb.starter.dtos.PersonDTO;
+import org.bson.Document;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public interface PersonService {
     List<PersonDTO> saveAll(List<PersonDTO> personEntities);
 
     List<PersonDTO> findAll();
+
+    List<Document> findAllDocuments();
 
     List<PersonDTO> findAll(List<String> ids);
 
